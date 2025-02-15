@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="环境准备按照需要准备机器环境，这里用两台机器搭建集群环境。其中一台是主节点master，一台是从节点node1    
+
+
+
+名称
+IP
+备注
+
+
+
+master
+192.168.1.115
+k8s主节点
+
+
+node1
+192.168.1.116
+k8s从节点
+
+
+环境配置
+设置主机名称
+
+123"/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Haaning Dang"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="k8s-环境搭建"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="环境准备按照需要准备机器环境，这里用两台机器搭建集群环境。其中一台是主节点master，一台是从节点node1    
+
+
+
+名称
+IP
+备注
+
+
+
+master
+192.168.1.115
+k8s主节点
+
+
+node1
+192.168.1.116
+k8s从节点
+
+
+环境配置
+设置主机名称
+
+123"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="haaning"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://example.comimg/home-bg.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="http://example.comimg/home-bg.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>k8s-环境搭建 - haaning</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Configurable Title</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://github.com/klugjo/hexo-theme-clean-blog">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>k8s-环境搭建</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2025-02-15
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h4 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h4><p>按照需要准备机器环境，这里用两台机器搭建集群环境。<br>其中一台是主节点master，一台是从节点node1    </p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="center">IP</th>
+<th align="right">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">master</td>
+<td align="center">192.168.1.115</td>
+<td align="right">k8s主节点</td>
+</tr>
+<tr>
+<td align="left">node1</td>
+<td align="center">192.168.1.116</td>
+<td align="right">k8s从节点</td>
+</tr>
+</tbody></table>
+<h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><ul>
+<li>设置主机名称</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">192.168.1.115</span></span><br><span class="line">hostnamectl set-hostname master</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">192.168.1.116</span></span><br><span class="line">hostnamectl set-hostname node1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>增加host配置</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改host文件</span></span><br><span class="line">vi /etc/hosts</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">分别添加主机名和ip的对应</span></span><br><span class="line">192.168.1.115 master</span><br><span class="line">192.168.1.116 node1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>关闭selinux</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/enforcing/disabled/&#x27; /etc/selinux/config</span><br></pre></td></tr></table></figure>
+<ul>
+<li>关闭swap交换内存</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">临时关闭</span></span><br><span class="line">sudo swapoff -a</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">永久关闭</span></span><br><span class="line">sudo sed -i &#x27;/ swap / s/^/#/&#x27; /etc/fstab</span><br></pre></td></tr></table></figure>
+<ul>
+<li>关闭防火墙</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ipv4流量传递</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysctl.d/k8s.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重新启动</span></span><br><span class="line">sysctl --system</span><br></pre></td></tr></table></figure>
+<h4 id="docker环境安装"><a href="#docker环境安装" class="headerlink" title="docker环境安装"></a>docker环境安装</h4><p>docker环境的安装可以参考文章[docker环境搭建]</p>
+<h4 id="k8s环境配置"><a href="#k8s环境配置" class="headerlink" title="k8s环境配置"></a>k8s环境配置</h4><p>设置k8s源的仓库：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">增加k8s源文件</span> </span><br><span class="line">vi /etc/yum.repos.d/kubernetes.repo</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">增加内容</span></span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-aarch64/</span><br><span class="line">gpgcheck=0</span><br><span class="line">repo_gpgcheck=0</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg </span><br></pre></td></tr></table></figure>
+<h4 id="k8s环境安装"><a href="#k8s环境安装" class="headerlink" title="k8s环境安装"></a>k8s环境安装</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装镜像</span></span><br><span class="line">dnf install -y kubelet kubeadm kubectl</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置自启动</span></span><br><span class="line">systemctl enable kubelet</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动k8s</span></span><br><span class="line">systemctl start kubelet</span><br></pre></td></tr></table></figure>
+<h4 id="初始化k8s集群"><a href="#初始化k8s集群" class="headerlink" title="初始化k8s集群"></a>初始化k8s集群</h4><ul>
+<li>查看需要安装的镜像</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">kubeadm config images list</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上面的命令提示需要安装下面的镜像</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">registry.k8s.io/kube-apiserver:v1.28.15</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">registry.k8s.io/kube-controller-manager:v1.28.15</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">registry.k8s.io/kube-scheduler:v1.28.15</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">registry.k8s.io/kube-proxy:v1.28.15</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">registry.k8s.io/pause:3.9</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">registry.k8s.io/etcd:3.5.9-0</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">registry.k8s.io/coredns/coredns:v1.10.1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置私有仓库<br>由于网络的问题，无法下载上面的镜像，所以先科学上网下载上面的镜像。<br>将上面下载的镜像上传到私有仓库里面。</li>
+<li>初始化k8s（下面的步骤只需要在主节点master配置）<br>通过命令<code>kubeadm init</code>初始化k8s环境，格式如下：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --apiserver-advertise-address=192.168.1.115 \</span><br><span class="line">--image-repository &lt;private-repository-url&gt; \</span><br><span class="line">--service-cidr=10.10.0.0/12 --pod-network-cidr=10.244.0.0/16</span><br></pre></td></tr></table></figure>
+<p>初始化的过程中，有以下几点需要注意：<br>虚拟机的内存大小需要保证大于2G<br>需要重置containerd，步骤如下：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">rm -rf /etc/containerd/config.toml</span><br><span class="line">systemctl restart containerd</span><br><span class="line">```  </span><br><span class="line">其他错误解决见链接：  </span><br><span class="line">[Kubeadm init 自遇报错合集及解决方案](https://www.cnblogs.com/rinya09/p/18057164)</span><br><span class="line">- 初始化集群  </span><br><span class="line">按照上面的步骤完成配置后，最终可以看到有成功的提示，这个时候需要按照提示初始化集群。  </span><br><span class="line">```shell</span><br><span class="line">mkdir -p $HOME/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) $HOME/.kube/config</span><br><span class="line">export KUBECONFIG=/etc/kubernetes/admin.conf</span><br></pre></td></tr></table></figure>
+<ul>
+<li>集群增加节点<br>初始化的时候，返回的内容有提示增加节点的token命令，但是token有过期时间。<br>后面如果需要增加节点，需要先在主节点生成token和ca证书：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm token create --print-join-command</span><br></pre></td></tr></table></figure>
+<p>节点加入到主节点：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kudeadm join &lt;master-ip&gt;:&lt;master-node-port&gt; --token &lt;token&gt; --discovery-token-ca-cert-hash &lt;hash&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="查看节点状态"><a href="#查看节点状态" class="headerlink" title="查看节点状态"></a>查看节点状态</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes</span><br></pre></td></tr></table></figure>
+<p>所有的节点此时还是NotReady状态，需要进行网络配置。  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/klugjo/hexo-theme-clean-blog" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2025 Haaning Dang<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

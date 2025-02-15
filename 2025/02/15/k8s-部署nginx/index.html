@@ -13,7 +13,9 @@
     
 
     
-        <meta name="description" content="123456789101112131415161718192021222324252627282930# 查看镜像docker images# 查看正在运行的容器docker ps# 查看所有的容器docker ps -a # 拉取镜像docker pull &amp;lt;image-name&amp;gt;# "/>
+        <meta name="description" content="构建自己的镜像镜像可以使用通用的镜像，但是生产中通常都需要部署服务或者修改配置文件。例如nginx，修改nginx的配置文件，并且打包成自己的镜像。  
+12FROM nginx:latestCOPY nginx.conf /etc/nginx/conf.d/default.conf
+构建打包镜像 "/>
     
 
     <!--Author-->
@@ -23,12 +25,14 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="docker的使用"/>
+        <meta property="og:title" content="k8s-部署nginx"/>
     
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="123456789101112131415161718192021222324252627282930# 查看镜像docker images# 查看正在运行的容器docker ps# 查看所有的容器docker ps -a # 拉取镜像docker pull &amp;lt;image-name&amp;gt;# "/>
+        <meta property="og:description" content="构建自己的镜像镜像可以使用通用的镜像，但是生产中通常都需要部署服务或者修改配置文件。例如nginx，修改nginx的配置文件，并且打包成自己的镜像。  
+12FROM nginx:latestCOPY nginx.conf /etc/nginx/conf.d/default.conf
+构建打包镜像 "/>
     
 
     <!--Open Graph Site Name-->
@@ -55,7 +59,7 @@
 
     <!-- Title -->
     
-    <title>docker的使用 - haaning</title>
+    <title>k8s-部署nginx - haaning</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -167,7 +171,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>docker的使用</h1>
+                    <h1>k8s-部署nginx</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
@@ -195,7 +199,26 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看镜像</span></span><br><span class="line">docker images</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看正在运行的容器</span></span><br><span class="line">docker ps</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看所有的容器</span></span><br><span class="line">docker ps -a </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">拉取镜像</span></span><br><span class="line">docker pull &lt;image-name&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">推送镜像到远程仓库</span></span><br><span class="line">docker push &lt;image-name&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">推送之前需要登录私有仓库</span></span><br><span class="line">docker login &lt;harbor-url&gt; -u &lt;user-account&gt; -p</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">登录的时候需要输入密码，按照上面的方式直接输入密码，可能会503，可以采取以下的方式</span></span><br><span class="line">echo &lt;user-password&gt; | docker login &lt;harbor-url&gt; -u &lt;user-account&gt; -p</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除镜像</span></span><br><span class="line">docker rmi &lt;image-id&gt;|&lt;image-name&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行容器</span></span><br><span class="line">docker run -itd &lt;image-name&gt; &lt;bin-path&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入容器</span></span><br><span class="line">docker exec -it &lt;container-id&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除容器</span></span><br><span class="line">docker rm &lt;container-id&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动容器</span></span><br><span class="line">docker start &lt;container-id&gt;|&lt;container-name&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">停止容器</span></span><br><span class="line">docker stop &lt;container-id&gt;|&lt;container-name&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">导出镜像</span></span><br><span class="line">docker -o &lt;image.tar&gt; &lt;image&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加载镜像</span></span><br><span class="line">docker load -i &lt;image.tar&gt;</span><br></pre></td></tr></table></figure>
+                <h4 id="构建自己的镜像"><a href="#构建自己的镜像" class="headerlink" title="构建自己的镜像"></a>构建自己的镜像</h4><p>镜像可以使用通用的镜像，但是生产中通常都需要部署服务或者修改配置文件。<br>例如nginx，修改nginx的配置文件，并且打包成自己的镜像。  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM nginx:latest</span><br><span class="line">COPY nginx.conf /etc/nginx/conf.d/default.conf</span><br></pre></td></tr></table></figure>
+<p>构建打包镜像  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t nginx:v.0.0.1 .</span><br></pre></td></tr></table></figure>
+<h4 id="创建k8s的Deployment"><a href="#创建k8s的Deployment" class="headerlink" title="创建k8s的Deployment"></a>创建k8s的Deployment</h4><p>配置文件如下：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: nginx-deploy</span><br><span class="line">  labels: </span><br><span class="line">    app: nginx</span><br><span class="line">spec:</span><br><span class="line">  replicas: 3</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: nginx</span><br><span class="line">  template:</span><br><span class="line">    metadata: </span><br><span class="line">      labels: </span><br><span class="line">        app: nginx</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: nginx-container</span><br><span class="line">        image: nginx:v.0.0.1</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 80</span><br></pre></td></tr></table></figure>
+<h4 id="创建service"><a href="#创建service" class="headerlink" title="创建service"></a>创建service</h4><p>配置文件：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: nginx-service</span><br><span class="line">spec:</span><br><span class="line">  selector:</span><br><span class="line">    app: nginx</span><br><span class="line">  ports:</span><br><span class="line">    - protocol: TCP</span><br><span class="line">      port: 80</span><br><span class="line">      targetPort: 80</span><br><span class="line">  type: NodePort</span><br></pre></td></tr></table></figure>
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f nginx-deploy.yaml</span><br><span class="line">kubectl apply -f nginx-service.yaml</span><br></pre></td></tr></table></figure>
+<p>查看deployment和pod的状态：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl get deployments</span><br><span class="line">kubectl get pods</span><br></pre></td></tr></table></figure>
+<p>查看pods节点错误的原因：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl describe pod &lt;pod-name&gt;</span><br></pre></td></tr></table></figure>
+<p>查看的时候发现pod节点拉取镜像报错。  </p>
+<h4 id="更新deployment"><a href="#更新deployment" class="headerlink" title="更新deployment"></a>更新deployment</h4><p>由于拉取镜像有问题，所以需要更新deployment拉取镜像的策略，更改为从本地仓库拉取。  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取deployment</span></span><br><span class="line">kubectl get deployments</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改deployment</span></span><br><span class="line">kubectl edit deployment &lt;deployment-name&gt;</span><br></pre></td></tr></table></figure>
+<p>或者通过apply文件  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f &lt;deployment.yaml&gt;</span><br></pre></td></tr></table></figure>
+<p>或者重启deployment  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl rollout restart deployment &lt;deployment-name&gt;</span><br></pre></td></tr></table></figure>
 
                 
             </div>
