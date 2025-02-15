@@ -13,6 +13,9 @@
     
 
     
+        <meta name="description" content="设置网卡网卡的位置路径一般如下：/etc/sysconfig/network-scripts需要修改的内容：  
+12345678910# 修改BOOTPROTO=staticONBOOT=yes# 新增# 根据机器的网络设置IPADDR=192.168.1.117NETMASK=255.255.2"/>
+    
 
     <!--Author-->
     
@@ -21,10 +24,13 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="haaning"/>
+        <meta property="og:title" content="虚拟机环境搭建"/>
     
 
     <!--Open Graph Description-->
+    
+        <meta property="og:description" content="设置网卡网卡的位置路径一般如下：/etc/sysconfig/network-scripts需要修改的内容：  
+12345678910# 修改BOOTPROTO=staticONBOOT=yes# 新增# 根据机器的网络设置IPADDR=192.168.1.117NETMASK=255.255.2"/>
     
 
     <!--Open Graph Site Name-->
@@ -32,7 +38,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website"/>
+        <meta property="og:type" content="article"/>
     
 
     <!--Page Cover-->
@@ -51,7 +57,7 @@
 
     <!-- Title -->
     
-    <title>Archives - haaning</title>
+    <title>虚拟机环境搭建 - haaning</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -155,140 +161,65 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>Archives</h1>
+                <div class="post-heading">
+                    <h1>虚拟机环境搭建</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2025-02-15
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2025/02/15/虚拟机环境搭建/">
-        <h1 class="post-title archive">
-            虚拟机环境搭建
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2025-02-15
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h4 id="设置网卡"><a href="#设置网卡" class="headerlink" title="设置网卡"></a>设置网卡</h4><p>网卡的位置路径一般如下：<br><code>/etc/sysconfig/network-scripts</code><br>需要修改的内容：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改</span></span><br><span class="line">BOOTPROTO=static</span><br><span class="line">ONBOOT=yes</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新增</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">根据机器的网络设置</span></span><br><span class="line">IPADDR=192.168.1.117</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=192.168.1.1</span><br><span class="line">DNS1=114.114.114.114</span><br><span class="line">DNS2=8.8.8.8</span><br></pre></td></tr></table></figure>
+<p>重置网络  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">centos8设置网络</span></span><br><span class="line">systemctl restart NetworkManager</span><br></pre></td></tr></table></figure>
+<h4 id="更新yum源"><a href="#更新yum源" class="headerlink" title="更新yum源"></a>更新yum源</h4><p>修改yum源为阿里云的yum源：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp -r /etc/yum.repos.d /etc/yum.repos.d.bak</span><br><span class="line">rm -rf /etc/yum.repos.d/*.repo</span><br><span class="line">sudo curl -o /etc/yum.repos.d/CentOs-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo</span><br></pre></td></tr></table></figure>
+<p>修改yum的缓存：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2025/02/15/docker使用/">
-        <h1 class="post-title archive">
-            docker的使用
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2025-02-15
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2025/02/15/docker环境搭建/">
-        <h1 class="post-title archive">
-            docker环境搭建
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2025-02-15
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2025/02/09/hive的安装/">
-        <h1 class="post-title archive">
-            hive的安装
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2025-02-09
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2025/02/09/hadoop的安装/">
-        <h1 class="post-title archive">
-            hadoop的安装
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2025-02-09
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2025/02/09/mysql8安装/">
-        <h1 class="post-title archive">
-            mysql8安装
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2025-02-09
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2025/02/09/基本linux命令/">
-        <h1 class="post-title archive">
-            基本linux命令
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2025-02-09
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2025/02/01/hello-world/">
-        <h1 class="post-title archive">
-            Hello World
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2025-02-01
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-    
-</ul>
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr />
