@@ -13,6 +13,10 @@
     
 
     
+        <meta name="description" content="hive提供类sql的查询，可以更好处理格式化数据，借助hdfs的存储，可以更加方便处理大数据。hive的安装依赖mysql和hadoop，其中mysql提供元数据的存储。
+下载安装包华为镜像库
+配置文件解压好安装包后，配置hive的环境变量修改/etc/profile文件，增加HIVE_HOME变"/>
+    
 
     <!--Author-->
     
@@ -25,6 +29,10 @@
     
 
     <!--Open Graph Description-->
+    
+        <meta property="og:description" content="hive提供类sql的查询，可以更好处理格式化数据，借助hdfs的存储，可以更加方便处理大数据。hive的安装依赖mysql和hadoop，其中mysql提供元数据的存储。
+下载安装包华为镜像库
+配置文件解压好安装包后，配置hive的环境变量修改/etc/profile文件，增加HIVE_HOME变"/>
     
 
     <!--Open Graph Site Name-->
@@ -191,7 +199,26 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
+                <p>hive提供类sql的查询，可以更好处理格式化数据，借助hdfs的存储，可以更加方便处理大数据。<br>hive的安装依赖mysql和hadoop，其中mysql提供元数据的存储。</p>
+<h4 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h4><p><a target="_blank" rel="noopener" href="https://mirrors.huaweicloud.com/apache/hive/">华为镜像库</a></p>
+<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><p>解压好安装包后，配置hive的环境变量<br>修改<code>/etc/profile</code>文件，增加<code>HIVE_HOME</code>变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HIVE_HOME=/usr/local/webserver/apache-hive-4.0.0-bin</span><br><span class="line">export PATH=$PATH:$&#123;HIVE_HOME&#125;/bin</span><br></pre></td></tr></table></figure>
+<p>修改配置文件，配置mysql和hadoop配置<br>将默认的配置文件修改名称  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv hive-default.xml.template ./hive-default.xml</span><br></pre></td></tr></table></figure>
+<p>增加<code>hive-site.xml</code>文件：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>初始化mysql元数据</p>
+<ul>
+<li>创建mysql用户并且新建对应的数据库</li>
+<li>使用命令初始化</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./schematool -initSchema -dbType mysql</span><br></pre></td></tr></table></figure>
+<h4 id="启动hive"><a href="#启动hive" class="headerlink" title="启动hive"></a>启动hive</h4><p>使用下面的命令启动hive  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup hiveserver2 &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>关闭hive命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hive --service hiveserver2 stop</span><br></pre></td></tr></table></figure>
+<p>连接hive：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!connect jdbc:hive2://192.168.1.112:10000</span><br></pre></td></tr></table></figure>
 
                 
             </div>

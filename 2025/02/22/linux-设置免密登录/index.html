@@ -13,6 +13,11 @@
     
 
     
+        <meta name="description" content="集群环境中，多台机器互访，需要配置机器之间的免密互访。通过ssh服务，可以配置两台机器之间的免密互访。  
+确保ssh服务正常配置ssh服务，依赖于ssh服务的正常运行。需要确保机器的ssh服务正常。如服务不存在或者服务关闭，请自行搜索解决。
+生成ssh密钥生成的命令如下：
+1ssh-keygen "/>
+    
 
     <!--Author-->
     
@@ -21,10 +26,15 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="haaning"/>
+        <meta property="og:title" content="linux-设置免密登录"/>
     
 
     <!--Open Graph Description-->
+    
+        <meta property="og:description" content="集群环境中，多台机器互访，需要配置机器之间的免密互访。通过ssh服务，可以配置两台机器之间的免密互访。  
+确保ssh服务正常配置ssh服务，依赖于ssh服务的正常运行。需要确保机器的ssh服务正常。如服务不存在或者服务关闭，请自行搜索解决。
+生成ssh密钥生成的命令如下：
+1ssh-keygen "/>
     
 
     <!--Open Graph Site Name-->
@@ -32,7 +42,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website"/>
+        <meta property="og:type" content="article"/>
     
 
     <!--Page Cover-->
@@ -51,7 +61,7 @@
 
     <!-- Title -->
     
-    <title>page - haaning</title>
+    <title>linux-设置免密登录 - haaning</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -156,83 +166,72 @@
 
     <!-- Main Content -->
     <!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
 <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>haaning</h1>
-                    <hr class="small">
-                    <span class="subheading"></span>
+                <div class="post-heading">
+                    <h1>linux-设置免密登录</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2025-02-22
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            
-                <div class="post-preview">
-    <a href="/2025/02/09/mysql8安装/">
-        <h2 class="post-title">
-            mysql8安装
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2025-02-09
-    </p>
-</div>
-<hr>
-            
-                <div class="post-preview">
-    <a href="/2025/02/09/基本linux命令/">
-        <h2 class="post-title">
-            基本linux命令
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2025-02-09
-    </p>
-</div>
-<hr>
-            
-                <div class="post-preview">
-    <a href="/2025/02/01/hello-world/">
-        <h2 class="post-title">
-            Hello World
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2025-02-01
-    </p>
-</div>
-<hr>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
             
 
-            <ul class="pager">
-    
-        <li class="previous"><a href="/">&larr;  Newer Posts</a></li>
-    
-    
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>集群环境中，多台机器互访，需要配置机器之间的免密互访。<br>通过ssh服务，可以配置两台机器之间的免密互访。  </p>
+<h4 id="确保ssh服务正常"><a href="#确保ssh服务正常" class="headerlink" title="确保ssh服务正常"></a>确保ssh服务正常</h4><p>配置ssh服务，依赖于ssh服务的正常运行。需要确保机器的ssh服务正常。<br>如服务不存在或者服务关闭，请自行搜索解决。</p>
+<h4 id="生成ssh密钥"><a href="#生成ssh密钥" class="headerlink" title="生成ssh密钥"></a>生成ssh密钥</h4><p>生成的命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 2048</span><br></pre></td></tr></table></figure>
+<p>生成的密钥默认保存在登录用户的<code>.ssh</code>目录下。<br>例如：<br>root用户保存在<code>/root/.ssh</code>目录下，super用户保存在<code>/home/super/.ssh</code>目录下。<br><strong>注意：如果需要的普通用户登录目标主机，需要切换到普通用户再进行密钥生成。</strong>  </p>
+<h4 id="复制密钥到目标主机"><a href="#复制密钥到目标主机" class="headerlink" title="复制密钥到目标主机"></a>复制密钥到目标主机</h4><p>复制密钥到目标主机有两种方式：  </p>
+<ul>
+<li>使用命令复制<br>可以通过命令<code>ssh-copy-id</code>命令将生成的密钥复制到目标机器。<br>格式如下：</li>
 </ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id &lt;target user&gt;@&lt;target host&gt;</span><br></pre></td></tr></table></figure>
+<p>例如，需要免密登录目标主机的super用户：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id super@192.168.1.113</span><br></pre></td></tr></table></figure>
+<ul>
+<li>手动复制<br>生成的密钥在目录<code>~/.ssh</code>目录下<br>其中，公钥的文件是<code>id_rsa.pub</code>，将该文件复制到目标机器目标用户目录下的<code>~/.ssh/authorized_keys</code>目录中</li>
+</ul>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
         </div>
     </div>
-</div>
-
-
+</article>
 
     <!-- Footer -->
     <hr />

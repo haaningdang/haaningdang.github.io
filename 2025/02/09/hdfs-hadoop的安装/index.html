@@ -14,7 +14,6 @@
 
     
         <meta name="description" content="hadoop为大数据提供了hdfs的存储，所以下面文档主要为了记录hadoop集群的搭建过程。hadoop集群至少需要三台机器，其中一台主节点，两台从节点。主节点是NameNode，从节点是DataNode。  
-
 机器准备
 
 
@@ -26,7 +25,7 @@ IP
 
 master
 192.168.1.112
-Na"/>
+Nam"/>
     
 
     <!--Author-->
@@ -36,13 +35,12 @@ Na"/>
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="hadoop的安装"/>
+        <meta property="og:title" content="hdfs-hadoop的安装"/>
     
 
     <!--Open Graph Description-->
     
         <meta property="og:description" content="hadoop为大数据提供了hdfs的存储，所以下面文档主要为了记录hadoop集群的搭建过程。hadoop集群至少需要三台机器，其中一台主节点，两台从节点。主节点是NameNode，从节点是DataNode。  
-
 机器准备
 
 
@@ -54,7 +52,7 @@ IP
 
 master
 192.168.1.112
-Na"/>
+Nam"/>
     
 
     <!--Open Graph Site Name-->
@@ -81,7 +79,7 @@ Na"/>
 
     <!-- Title -->
     
-    <title>hadoop的安装 - haaning</title>
+    <title>hdfs-hadoop的安装 - haaning</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -193,7 +191,7 @@ Na"/>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>hadoop的安装</h1>
+                    <h1>hdfs-hadoop的安装</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
@@ -221,9 +219,7 @@ Na"/>
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <blockquote>
-<p>hadoop为大数据提供了hdfs的存储，所以下面文档主要为了记录hadoop集群的搭建过程。<br>hadoop集群至少需要三台机器，其中一台主节点，两台从节点。主节点是NameNode，从节点是DataNode。  </p>
-</blockquote>
+                <p>hadoop为大数据提供了hdfs的存储，所以下面文档主要为了记录hadoop集群的搭建过程。<br>hadoop集群至少需要三台机器，其中一台主节点，两台从节点。主节点是NameNode，从节点是DataNode。  </p>
 <h4 id="机器准备"><a href="#机器准备" class="headerlink" title="机器准备"></a>机器准备</h4><table>
 <thead>
 <tr>
@@ -235,17 +231,17 @@ Na"/>
 <tbody><tr>
 <td align="left">master</td>
 <td align="center">192.168.1.112</td>
-<td align="right">NameNode</td>
+<td align="right">NameNode、NodeManager</td>
 </tr>
 <tr>
 <td align="left">slave1</td>
 <td align="center">192.168.1.113</td>
-<td align="right">DataNode</td>
+<td align="right">DataNode、ResourceManager、NodeManager</td>
 </tr>
 <tr>
 <td align="left">slave2</td>
 <td align="center">192.168.1.114</td>
-<td align="right">DataNode</td>
+<td align="right">DataNode、SecondaryNameNode、NodeManager</td>
 </tr>
 <tr>
 <td align="left">准备好机器后，需要配置三台机器的免密登录。（可以参考<code>基本linux命令</code>中的内容）</td>
@@ -269,27 +265,33 @@ Na"/>
 <h4 id="安装hadoop的NameNode节点"><a href="#安装hadoop的NameNode节点" class="headerlink" title="安装hadoop的NameNode节点"></a>安装hadoop的NameNode节点</h4><ul>
 <li>解压hadoop安装包</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-3.3.1-aarch64.tar.gz</span><br><span class="line">mv hadoop-3.3.1 hadoop</span><br><span class="line">```  </span><br><span class="line">- 设置hadoop环境变量  </span><br><span class="line">```shell</span><br><span class="line">export JAVA_HOME=/usr/local/webserver/jdk-15.0.2</span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JAVA_HOME&#125;/jre/lib</span><br><span class="line">export HADOOP_HOME=/usr/local/webserver/hadoop</span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$&#123;HADOOP_HOME&#125;/bin:$&#123;HADOOP_HOME&#125;/sbin:$PATH</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-3.3.1-aarch64.tar.gz</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="built_in">mv</span> hadoop-3.3.1 hadoop</span></span><br><span class="line">```  </span><br><span class="line">- 设置hadoop环境变量  </span><br><span class="line">```shell</span><br><span class="line">export JAVA_HOME=/usr/local/webserver/jdk-15.0.2</span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JAVA_HOME&#125;/jre/lib</span><br><span class="line">export HADOOP_HOME=/usr/local/webserver/hadoop-3.3.1</span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$&#123;HADOOP_HOME&#125;/bin:$&#123;HADOOP_HOME&#125;/sbin:$PATH</span><br></pre></td></tr></table></figure>
 <ul>
 <li>创建hadoop目录</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir /data/hadoop/tmp</span><br><span class="line">mkdir /data/hadoop/names</span><br><span class="line">mkdir /data/hadoop/data</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建用户hadoop并且赋权</span></span><br><span class="line">groupadd hadoop</span><br><span class="line">useradd -g hadoop hadoop</span><br><span class="line">chown -R hadoop:hadoop /data/hadoop</span><br></pre></td></tr></table></figure>
 <ul>
-<li>修改hadoop配置文件<br>修改core-site.xml文件：</li>
+<li>修改hadoop配置文件<br>可以在sh文件中指定用户：</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">&lt;value&gt;hdfs://master:9000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">&lt;value&gt;/data/hadoop/tmp&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br><span class="line">```  </span><br><span class="line">修改hdfs-site.xml配置文件：  </span><br><span class="line">```shell</span><br><span class="line"></span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.namenode.user.name&lt;/name&gt;</span><br><span class="line">&lt;value&gt;hadoop&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.namenode.user&lt;/name&gt;</span><br><span class="line">&lt;value&gt;hadoop&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;:wq</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">&lt;value&gt;/data/hadoop/names&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">&lt;value&gt;/data/hadoop/data&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">&lt;value&gt;3&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.datanode.ipc.address&lt;/name&gt;</span><br><span class="line">&lt;value&gt;0.0.0.0:50020&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.datanode.http.address&lt;/name&gt;</span><br><span class="line">&lt;value&gt;0.0.0.0:50075&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br><span class="line">```  </span><br><span class="line">修改yarn-site.xml配置文件：  </span><br><span class="line">```shell</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Site specific YARN configuration properties --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">&lt;value&gt;master&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">&lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HDFS_NAME_USER=hadoop</span><br><span class="line">HDFS_SECONDARYNAMENODE_USER=hadoop</span><br><span class="line">HDFS_DATANODE_USER=hadoop</span><br><span class="line">HDFS_DATANODE_SECURE_USER=hadoop</span><br></pre></td></tr></table></figure>
+<p>修改core-site.xml文件：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hdfs://master:9000&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;/data/hadoop/tmp&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;!-- 允许hive的连接 --&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.proxyuser.hadoop.hosts&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;*&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.proxyyser.hadoop.groups&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;*&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br><span class="line">```  </span><br><span class="line">修改hdfs-site.xml配置文件：  </span><br><span class="line">```shell</span><br><span class="line"></span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;!--通过sh脚本设置用户--&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;dfs.namenode.user.name&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hadoop&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;dfs.namenode.user&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hadoop&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;!-- end --&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;3&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/data/hadoop/names&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;/data/hadoop/data&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;dfs.namenode.http-address&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;master:9870&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;slave2:9868&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br><span class="line">```  </span><br><span class="line">修改yarn-site.xml配置文件：  </span><br><span class="line">```shell</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Site specific YARN configuration properties --&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;slave1&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
 <p>修改mapred-site.xml配置文件：  </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">&lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
 <p>修改workers文件：  </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">slave1</span><br><span class="line">slave2</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">master</span><br><span class="line">slave1</span><br><span class="line">slave2</span><br></pre></td></tr></table></figure>
 <ul>
 <li>初始化NameNode</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -format</span><br></pre></td></tr></table></figure>
 <ul>
 <li>启动hadoop</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./sbin/start-all.sh</span><br></pre></td></tr></table></figure>
+<p>启动的时候提示<code>JAVA_HOME is not set and could not be found</code><br>需要修改<code>./etc/hadoop/hadoop-env.sh</code>命令中的<code>JAVA_HOME</code>和<code>HADOOP_HOME</code>配置<br>通过链接访问datanode的管理页面：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.112:9870</span><br></pre></td></tr></table></figure>
+<h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013310025/article/details/53415040">【hadoop学习之一】Hadoop集群 安装配置</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_49001740/article/details/124497230">Hadoop集群搭建(五)-集群配置文件</a></p>
+
 
                 
             </div>

@@ -13,6 +13,9 @@
     
 
     
+        <meta name="description" content="hdfs的命令一般以hdfs dfs开头，基本命令和linux的用法类型，下面简单罗列一些日常常用的命令：  
+12345678910111213141516# 查看目录hdfs dfs -ls &amp;lt;path&amp;gt;# 创建目录hdfs dfs -mkdir &amp;lt;path&amp;gt;# 上传本地"/>
+    
 
     <!--Author-->
     
@@ -21,10 +24,13 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="haaning"/>
+        <meta property="og:title" content="hdfs-hdfs使用"/>
     
 
     <!--Open Graph Description-->
+    
+        <meta property="og:description" content="hdfs的命令一般以hdfs dfs开头，基本命令和linux的用法类型，下面简单罗列一些日常常用的命令：  
+12345678910111213141516# 查看目录hdfs dfs -ls &amp;lt;path&amp;gt;# 创建目录hdfs dfs -mkdir &amp;lt;path&amp;gt;# 上传本地"/>
     
 
     <!--Open Graph Site Name-->
@@ -32,7 +38,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website"/>
+        <meta property="og:type" content="article"/>
     
 
     <!--Page Cover-->
@@ -51,7 +57,7 @@
 
     <!-- Title -->
     
-    <title>page - haaning</title>
+    <title>hdfs-hdfs使用 - haaning</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -156,83 +162,58 @@
 
     <!-- Main Content -->
     <!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
 <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>haaning</h1>
-                    <hr class="small">
-                    <span class="subheading"></span>
+                <div class="post-heading">
+                    <h1>hdfs-hdfs使用</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2025-02-22
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            
-                <div class="post-preview">
-    <a href="/2025/02/09/mysql8安装/">
-        <h2 class="post-title">
-            mysql8安装
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2025-02-09
-    </p>
-</div>
-<hr>
-            
-                <div class="post-preview">
-    <a href="/2025/02/09/基本linux命令/">
-        <h2 class="post-title">
-            基本linux命令
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2025-02-09
-    </p>
-</div>
-<hr>
-            
-                <div class="post-preview">
-    <a href="/2025/02/01/hello-world/">
-        <h2 class="post-title">
-            Hello World
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2025-02-01
-    </p>
-</div>
-<hr>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
             
 
-            <ul class="pager">
-    
-        <li class="previous"><a href="/">&larr;  Newer Posts</a></li>
-    
-    
-</ul>
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>hdfs的命令一般以<code>hdfs dfs</code>开头，基本命令和linux的用法类型，下面简单罗列一些日常常用的命令：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看目录</span></span><br><span class="line">hdfs dfs -ls &lt;path&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建目录</span></span><br><span class="line">hdfs dfs -mkdir &lt;path&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上传本地的文件</span></span><br><span class="line">hdfs dfs -put/-copyFromLocal &lt;local_file&gt; &lt;hdfs_path&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载文件到本地目录</span></span><br><span class="line">hdfs dfs -get/-copyToLocal &lt;hdfs_file&gt; &lt;local_path&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除文件或者目录</span></span><br><span class="line">hdfs dfs -rm &lt;hdfs_path&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看文件内容</span></span><br><span class="line">hdfs dfs -cat/-tail &lt;hdfs_path&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更改名称</span></span><br><span class="line">hdfs dfs -mv &lt;old_file&gt; &lt;new_file&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改权限</span></span><br><span class="line">hdfs dfs -chmod 666 &lt;hdfs_path&gt;</span><br></pre></td></tr></table></figure>
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
         </div>
     </div>
-</div>
-
-
+</article>
 
     <!-- Footer -->
     <hr />
